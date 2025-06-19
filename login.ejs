@@ -3,176 +3,253 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Inviso Login & Register dengan Background Slideshow</title>
+  <title>Meja Ruang Tamu</title>
 
-  <!-- Remix Icon -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: #1a1a1a;
+    }
+
+    .logo-font {
+      font-family: "Nosifer", sans-serif;
+      color: #E2E2DF;
+      font-size: 36px;
+      text-shadow: none;
+    }
+
+    nav {
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+    }
+
+    .neon-glow {
+      animation: neonPulse 8s infinite;
+    }
+
+    .instagram-icon {
+      background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      text-shadow: 0 0 3px #fff, 0 0 5px #fff, 0 0 3px #feda75,
+                   0 0 6px #fa7e1e, 0 0 4px #d62976,
+                   0 0 1px #962fbf, 0 0 0px #4f5bd5;
+      animation: blinkOnOff 4s infinite step-start;
+    }
+
+    @keyframes blinkOnOff {
+      0%, 49.9% { opacity: 1; }
+      50%, 100% { opacity: 0; text-shadow: none; }
+    }
+
+    #userBtn i {
+      color: #229ED9;
+    }
+
+    #cart-count {
+      display: none;
+    }
+
+    
+
+   
+  </style>
 </head>
-<body>
 
- <div class="absolute inset-0 -z-10 slideshow-background overflow-hidden">
-  <% for (let i = 1; i <= 10; i++) { %>
-    <img src="/images/bg/bg<%= i %>.jpg"
-      class="w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 <%= i === 1 ? 'opacity-100' : 'opacity-0' %>" 
-      alt="Background <%= i %>" />
-  <% } %>
-</div>
+<body class="bg-gray-100">
 
-<div class="absolute inset-0 bg-black bg-opacity-60 -z-10"></div>
+<!-- Navbar -->
+<nav class="text-white px-4 py-3 h-24 flex items-center justify-center sticky top-0 z-10 relative bg-black">
+  <!-- Ikon Kiri -->
+  <div class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center space-x-4">
+    <button id="menuBtn" class="text-3xl hover:text-gray-300 hover:scale-110 transition" aria-label="Menu">
+      <i class="ri-menu-line"></i>
+    </button>
 
-<div class="min-h-screen flex flex-col justify-center items-center px-4">
-  <div class="w-full max-w-md bg-white bg-opacity-90 rounded-xl shadow-xl p-8 space-y-6">
-    <h1 id="form-title" class="text-3xl font-bold text-center text-gray-800">LOGIN</h1>
-    <p class="subtitle text-center text-gray-600">
-      <span id="typed" class="text-blue-600"></span><span id="cursor" class="animate-pulse">|</span>
-    </p>
+    <a href="https://instagram.com/rhanray_" target="_blank" class="text-3xl hover:text-gray-300 hover:scale-110 transition instagram-icon">
+      <i class="ri-instagram-line"></i>
+    </a>
 
-    <!-- Login Form -->
-    <form id="loginForm" class="space-y-4 active" autocomplete="off" novalidate>
-      <input type="text" name="username" placeholder="Username" aria-label="Username" required autofocus
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+    <a href="https://wa.me/6282197770219" target="_blank" class="text-3xl hover:text-green-600 hover:scale-110 transition" style="color: #25D366;">
+      <i class="ri-whatsapp-line"></i>
+    </a>
 
-      <div class="relative">
-        <input type="password" id="loginPassword" name="password" placeholder="Password" aria-label="Password" required
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-        <i class="ri-eye-line absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-           onclick="togglePassword('loginPassword')" role="button" aria-label="Toggle Password Visibility" tabindex="0"></i>
+    <button id="userBtn" class="text-3xl hover:text-gray-300 hover:scale-110 transition" aria-label="User account">
+      <i class="ri-user-line"></i>
+    </button>
+  </div>
+
+  <!-- Logo -->
+  <a href="/" id="logo" aria-label="Homepage" class="logo-font neon-glow font-1px select-none ml-20">
+    dzulfikar
+  </a>
+
+  <!-- Ikon Keranjang -->
+  <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center space-x-4">
+    <a href="checkout.html" class="relative text-4xl hover:text-gray-300 hover:scale-110 transition" aria-label="Shopping cart">
+      <i class="ri-shopping-cart-line"></i>
+      <span id="cart-count" class="absolute -top-2 -right-2 bg-blue-600 text-xl rounded-full w-5 h-5 flex items-center justify-center font-semibold">0</span>
+    </a>
+  </div>
+</nav>
+
+<!-- Modal Login/Register -->
+<div id="loginModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50">
+  <div class="w-screen h-screen bg-white bg-opacity-20 backdrop-blur-md border border-white/30 rounded-3xl p-8 shadow-lg text-blue font-sans">
+    <h2 id="modalTitle" class="text-3xl font-semibold mb-6 text-white glow-super-bright">Login</h2>
+    <form id="authForm" class="space-y-4">
+      <input type="text" id="username" placeholder="Username" required class="w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:bg-opacity-30 focus:border-blue-400" />
+      <input type="email" id="email" placeholder="Email" class="hidden w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:bg-opacity-30 focus:border-blue-400" />
+      <input type="password" id="password" placeholder="Password" required class="w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:bg-opacity-30 focus:border-blue-400" />
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" class="hidden w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:bg-opacity-30 focus:border-blue-400" />
+
+      <div class="flex justify-start items-center gap-4">
+        <button type="submit" id="submitBtn" class="w-36 py-3 rounded-xl bg-blue-600 bg-opacity-80 hover:bg-blue-700 transition font-semibold flex items-center justify-center gap-2 text-white">
+          <i class="ri-login-box-line"></i><span>Login</span>
+        </button>
+        <button type="button" id="toggleBtn" class="underline text-sm text-black/90 hover:text-white">Register</button>
       </div>
-
-      <button type="submit"
-        class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">MASUK</button>
-      <button type="button" onclick="switchForm('register')"
-        class="w-full py-2 px-4 border border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition">DAFTAR</button>
     </form>
 
-    <!-- Register Form -->
-    <form id="registerForm" class="space-y-4 hidden" autocomplete="off" novalidate>
-      <input type="text" name="username" placeholder="Username" aria-label="Username" required
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-
-      <div class="relative">
-        <input type="password" id="regPassword" name="password" placeholder="Password" aria-label="Password" required
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-        <i class="ri-eye-line absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-           onclick="togglePassword('regPassword')" role="button" aria-label="Toggle Password Visibility" tabindex="0"></i>
-      </div>
-
-      <div class="relative">
-        <input type="password" id="regConfirm" name="confirmPassword" placeholder="Confirm Password" aria-label="Confirm Password" required
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-        <i class="ri-eye-line absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-           onclick="togglePassword('regConfirm')" role="button" aria-label="Toggle Password Visibility" tabindex="0"></i>
-      </div>
-
-      <button type="submit"
-        class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">DAFTAR</button>
-      <button type="button" onclick="switchForm('login')"
-        class="w-full py-2 px-4 border border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition">MASUK</button>
-    </form>
-
-    <footer class="pt-4 border-t border-gray-200">
-      <div class="flex justify-center gap-6 text-xl text-gray-600">
-        <a href="https://web.facebook.com/rayhanganteng.rayhanganteng.90" target="_blank" aria-label="Facebook"
-          class="hover:text-blue-700"><i class="ri-facebook-fill"></i></a>
-        <a href="https://wa.me/6282197770219" target="_blank" aria-label="WhatsApp"
-          class="hover:text-green-500"><i class="ri-whatsapp-fill"></i></a>
-        <a href="https://www.instagram.com/rhanray_/" target="_blank" aria-label="Instagram"
-          class="hover:text-pink-500"><i class="ri-instagram-fill"></i></a>
-        <a href="https://x.com/" target="_blank" aria-label="X (Twitter)"
-          class="hover:text-gray-800"><i class="ri-twitter-x-line"></i></a>
-      </div>
-    </footer>
+    <div class="flex justify-end mt-4">
+      <button id="closeModalBtn" class="absolute top-7 right-4 px-4 py-2 rounded-full bg-red-800 hover:bg-red-700 transition font-semibold text-white flex items-center gap-1 text-sm">
+        <i class="ri-close-line"></i> Tutup
+      </button>
+    </div>
   </div>
 </div>
 
+<!-- Produk -->
+<div class="p-4">
+  <div id="product-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</div>
 
-  <script>// Slideshow background
-  const slides = document.querySelectorAll('.slideshow-background img');
-  let current = 0;
-  function nextSlide() {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-  }
-  setInterval(nextSlide, 4000);
+<script>
+  const container = document.getElementById('product-container');
+  const cartCount = document.getElementById('cart-count');
 
-  const typedEl = document.getElementById("typed");
-  const cursor = document.getElementById("cursor");
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginModal = document.getElementById('loginModal');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const emailInput = document.getElementById('email');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const submitBtn = document.getElementById('submitBtn');
+    const userBtn = document.getElementById('userBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-  const texts = {
-    login: "silahkan masukan username",
-    register: "daftar username dan password"
-  };
+    let isRegister = false;
 
-  let currentForm = 'login';
-  let i = 0;
-  let typingInterval;
-  let resetTimeout;
+    toggleBtn?.addEventListener('click', () => {
+      isRegister = !isRegister;
+      modalTitle.textContent = isRegister ? 'Register' : 'Login';
+      emailInput.classList.toggle('hidden', !isRegister);
+      confirmPasswordInput.classList.toggle('hidden', !isRegister);
+      submitBtn.innerHTML = isRegister
+        ? `<i class="ri-user-add-line"></i><span>Register</span>`
+        : `<i class="ri-login-box-line"></i><span>Login</span>`;
+      toggleBtn.textContent = isRegister ? 'Login' : 'Register';
+    });
 
-  function typeText(text) {
-    clearInterval(typingInterval);
-    clearTimeout(resetTimeout);
-    i = 0;
-    typedEl.textContent = "";
+    userBtn?.addEventListener('click', () => {
+      loginModal?.classList.remove('hidden');
+      loginModal?.classList.add('flex');
+    });
 
-    typingInterval = setInterval(() => {
-      if (i < text.length) {
-        typedEl.textContent += text.charAt(i);
-        i++;
-      } else {
-        clearInterval(typingInterval);
-        resetTimeout = setTimeout(() => {
-          typedEl.textContent = "";
-          i = 0;
-          typeText(text); // loop ulang
-        }, 4500);
-      }
-    }, 95); // Kecepatan ketik
-  }
+    closeModalBtn?.addEventListener('click', () => {
+      loginModal?.classList.add('hidden');
+      loginModal?.classList.remove('flex');
+      isRegister = false;
+      modalTitle.textContent = 'Login';
+      emailInput.classList.add('hidden');
+      confirmPasswordInput.classList.add('hidden');
+      submitBtn.innerHTML = `<i class="ri-login-box-line"></i><span>Login</span>`;
+      toggleBtn.textContent = 'Register';
+    });
+  });
 
-  // Mulai pertama kali
-  typeText(texts.login);
-
-  // Switch form
-  function switchForm(target) {
-    currentForm = target;
-    document.getElementById('loginForm').classList.remove('active');
-    document.getElementById('registerForm').classList.remove('active');
-    document.getElementById(target + 'Form').classList.add('active');
-    document.getElementById('form-title').textContent = target.toUpperCase();
-
-    // Reset ketikan saat ganti form
-    typeText(texts[target]);
-  }
-
-  // Toggle password visibility
-  function togglePassword(id) {
-    const input = document.getElementById(id);
-    const icon = input.nextElementSibling;
-    if (input.type === "password") {
-      input.type = "text";
-      icon.classList.remove('ri-eye-line');
-      icon.classList.add('ri-eye-off-line');
-    } else {
-      input.type = "password";
-      icon.classList.remove('ri-eye-off-line');
-      icon.classList.add('ri-eye-line');
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("checkout")) || [];
+    const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+    if (cartCount) {
+      cartCount.textContent = totalQty;
+      cartCount.style.display = totalQty > 0 ? "flex" : "none";
     }
   }
+  updateCartCount();
 
-  // Optional: handle form submission here
-  document.getElementById('loginForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Login submitted!');
-    // Add your login logic here
-  });
+  const descriptions = [
+    "An exclusive dark-themed hoodie boasting a majestic scorpion emblem at its core.",
+    "A luxurious hoodie adorned with an intricately detailed spider masterpiece.",
+    "A premium hoodie illuminated by a mysterious, radiant eye motif.",
+    "Custom-crafted masterpiece showcasing a third eye skull design of supreme artistry.",
+  ];
 
-  document.getElementById('registerForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Register submitted!');
-    // Add your register logic here
-  });
-  </script>
+  for (let i = 1; i <= 25; i++) {
+    const productDiv = document.createElement('div');
+    productDiv.className = 'bg-white p-4 rounded-lg shadow flex flex-col';
+
+    const img = document.createElement('img');
+    img.src = `/images/${i}.jpg`;
+    img.alt = `Produk ${i}`;
+    img.className = 'w-full h-[280px] object-contain rounded-md mb-4 bg-white';
+
+    const title = document.createElement('h3');
+    title.className = 'text-lg font-semibold mb-1';
+    title.textContent = `Produk ${i}`;
+
+    const desc = document.createElement('p');
+    desc.className = 'text-gray-600 text-sm mb-2';
+    desc.textContent = descriptions[(i - 1) % descriptions.length];
+
+    const price = document.createElement('div');
+    price.className = 'text-gray-800 font-bold mb-4';
+    price.textContent = 'Rp250.000';
+
+    const button = document.createElement('button');
+    button.className = 'mt-auto bg-black hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center gap-2 relative';
+    button.innerHTML = '<i class="ri-shopping-cart-line absolute left-4"></i><span>Tambah ke Keranjang</span>';
+
+    button.addEventListener('click', () => {
+      const item = {
+        title: title.textContent,
+        desc: desc.textContent,
+        price: price.textContent,
+        image: img.src,
+        qty: 1
+      };
+      const cart = JSON.parse(localStorage.getItem("checkout")) || [];
+      const existing = cart.find(p => p.title === item.title);
+      if (existing) {
+        existing.qty = (existing.qty || 1) + 1;
+      } else {
+        cart.push(item);
+      }
+      localStorage.setItem("checkout", JSON.stringify(cart));
+      updateCartCount();
+    });
+
+    productDiv.appendChild(img);
+    productDiv.appendChild(title);
+    productDiv.appendChild(desc);
+    productDiv.appendChild(price);
+    productDiv.appendChild(button);
+    container.appendChild(productDiv);
+  }
+</script>
+
 </body>
 </html>
