@@ -27,7 +27,6 @@
       font-family: "Nosifer", sans-serif;
       color: #E2E2DF;
       font-size: 36px;
-      text-shadow: none;
     }
 
     nav {
@@ -39,20 +38,8 @@
       animation: neonPulse 8s infinite;
     }
 
-    .instagram-icon {
-      background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-      text-shadow: 0 0 3px #fff, 0 0 5px #fff, 0 0 3px #feda75,
-                   0 0 6px #fa7e1e, 0 0 4px #d62976,
-                   0 0 1px #962fbf, 0 0 0px #4f5bd5;
-      animation: blinkOnOff 4s infinite step-start;
-    }
-
-    @keyframes blinkOnOff {
-      0%, 49.9% { opacity: 1; }
-      50%, 100% { opacity: 0; text-shadow: none; }
+    #sidebar {
+      transition: transform 0.3s ease-in-out;
     }
 
     #userBtn i {
@@ -62,42 +49,42 @@
     #cart-count {
       display: none;
     }
-
-    
-
-   
   </style>
 </head>
-
 <body class="bg-gray-100">
+
+<!-- Sidebar -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-40 hidden z-40"></div>
+<div id="sidebar" class="fixed top-0 left-0 h-full w-[700px] bg-black text-white transform -translate-x-full z-50 shadow-lg">
+  <div class="flex items-center justify-between p-4 border-b border-gray-700">
+    <h2 class="text-xl font-bold">Menu</h2>
+    <button id="closeSidebar" class="text-2xl hover:text-red-400">
+      <i class="ri-close-line"></i>
+    </button>
+  </div>
+  <ul class="p-4 space-y-4">
+    <li><a href="/" class="hover:text-blue-400 transition">Home</a></li>
+    <li><a href="#product-container" class="hover:text-blue-400 transition">Produk</a></li>
+    <li><a href="checkout.html" class="hover:text-blue-400 transition">Checkout</a></li>
+  </ul>
+</div>
 
 <!-- Navbar -->
 <nav class="text-white px-4 py-3 h-24 flex items-center justify-center sticky top-0 z-10 relative bg-black">
-  <!-- Ikon Kiri -->
   <div class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center space-x-4">
     <button id="menuBtn" class="text-3xl hover:text-gray-300 hover:scale-110 transition" aria-label="Menu">
       <i class="ri-menu-line"></i>
     </button>
-
-    <a href="https://instagram.com/rhanray_" target="_blank" class="text-3xl hover:text-gray-300 hover:scale-110 transition instagram-icon">
-      <i class="ri-instagram-line"></i>
-    </a>
-
-    <a href="https://wa.me/6282197770219" target="_blank" class="text-3xl hover:text-green-600 hover:scale-110 transition" style="color: #25D366;">
-      <i class="ri-whatsapp-line"></i>
-    </a>
 
     <button id="userBtn" class="text-3xl hover:text-gray-300 hover:scale-110 transition" aria-label="User account">
       <i class="ri-user-line"></i>
     </button>
   </div>
 
-  <!-- Logo -->
   <a href="/" id="logo" aria-label="Homepage" class="logo-font neon-glow font-1px select-none ml-20">
-    dzulfikar
+    weedmaps
   </a>
 
-  <!-- Ikon Keranjang -->
   <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center space-x-4">
     <a href="checkout.html" class="relative text-4xl hover:text-gray-300 hover:scale-110 transition" aria-label="Shopping cart">
       <i class="ri-shopping-cart-line"></i>
@@ -109,15 +96,15 @@
 <!-- Modal Login/Register -->
 <div id="loginModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50">
   <div class="w-screen h-screen bg-white bg-opacity-20 backdrop-blur-md border border-white/30 rounded-3xl p-8 shadow-lg text-blue font-sans">
-    <h2 id="modalTitle" class="text-3xl font-semibold mb-6 text-white glow-super-bright">Login</h2>
+    <h2 id="modalTitle" class="text-3xl font-semibold mb-6 text-white">Login</h2>
     <form id="authForm" class="space-y-4">
-      <input type="text" id="username" placeholder="Username" required class="w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:bg-opacity-30 focus:border-blue-400" />
-      <input type="email" id="email" placeholder="Email" class="hidden w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:bg-opacity-30 focus:border-blue-400" />
-      <input type="password" id="password" placeholder="Password" required class="w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:bg-opacity-30 focus:border-blue-400" />
-      <input type="password" id="confirmPassword" placeholder="Confirm Password" class="hidden w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:bg-opacity-30 focus:border-blue-400" />
+      <input type="text" id="username" placeholder="Username" required class="w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none" />
+      <input type="email" id="email" placeholder="Email" class="hidden w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none" />
+      <input type="password" id="password" placeholder="Password" required class="w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none" />
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" class="hidden w-full px-5 py-3 rounded-xl bg-black bg-opacity-15 border border-white/30 text-white placeholder-white/60 focus:outline-none" />
 
       <div class="flex justify-start items-center gap-4">
-        <button type="submit" id="submitBtn" class="w-36 py-3 rounded-xl bg-blue-600 bg-opacity-80 hover:bg-blue-700 transition font-semibold flex items-center justify-center gap-2 text-white">
+        <button type="submit" id="submitBtn" class="w-36 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 transition font-semibold flex items-center justify-center gap-2 text-white">
           <i class="ri-login-box-line"></i><span>Login</span>
         </button>
         <button type="button" id="toggleBtn" class="underline text-sm text-black/90 hover:text-white">Register</button>
@@ -140,6 +127,11 @@
 <script>
   const container = document.getElementById('product-container');
   const cartCount = document.getElementById('cart-count');
+
+  const sidebar = document.getElementById('sidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+  const menuBtn = document.getElementById('menuBtn');
+  const closeSidebar = document.getElementById('closeSidebar');
 
   document.addEventListener("DOMContentLoaded", function () {
     const loginModal = document.getElementById('loginModal');
@@ -179,6 +171,22 @@
       submitBtn.innerHTML = `<i class="ri-login-box-line"></i><span>Login</span>`;
       toggleBtn.textContent = 'Register';
     });
+
+    // Sidebar events
+    menuBtn?.addEventListener('click', () => {
+      sidebar.classList.remove('-translate-x-full');
+      sidebarOverlay.classList.remove('hidden');
+    });
+
+    closeSidebar?.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      sidebarOverlay.classList.add('hidden');
+    });
+
+    sidebarOverlay?.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      sidebarOverlay.classList.add('hidden');
+    });
   });
 
   function updateCartCount() {
@@ -198,7 +206,7 @@
     "Custom-crafted masterpiece showcasing a third eye skull design of supreme artistry.",
   ];
 
-  for (let i = 1; i <= 25; i++) {
+  for (let i = 1; i <= 19; i++) {
     const productDiv = document.createElement('div');
     productDiv.className = 'bg-white p-4 rounded-lg shadow flex flex-col';
 
